@@ -45,5 +45,18 @@ namespace EmployeeManagement.Test
             // Assert
             Assert.InRange(employee.Salary, 2500, 3500);
         }
+        [Fact]
+        public void CreateEmployee_ConstructInternalEmployee_SalaryMustBe2500_PrecisionExample()
+        {
+            // Arrange
+            var employeeFactory = new EmployeeFactory();
+
+            // Act
+            var employee = (InternalEmployee)employeeFactory.CreateEmployee("Kevin", "Dockx");
+            employee.Salary = 2500.123m;  // 'm' is used to initialize the number as decimal instead of double (standard)
+
+            // Assert
+            Assert.Equal(2500, employee.Salary, 0);
+        }
     }
 }
