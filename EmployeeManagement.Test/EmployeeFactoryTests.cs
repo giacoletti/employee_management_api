@@ -58,5 +58,19 @@ namespace EmployeeManagement.Test
             // Assert
             Assert.Equal(2500, employee.Salary, 0);
         }
+        [Fact]
+        public void CreateEmployee_IsËxternalIsTrue_ReturnTypeMustBeExternalEmployee()
+        {
+            // Arrange
+            var employeeFactory = new EmployeeFactory();
+
+            // Act
+            var employee = employeeFactory.CreateEmployee("Kevin", "Dockx", "Marvin", true);
+
+            // Assert
+            Assert.IsType<ExternalEmployee>(employee);
+            Assert.IsNotType<InternalEmployee>(employee);
+            Assert.IsAssignableFrom<Employee>(employee);  // ExternalEmployee is a subclass of Employee
+        }
     }
 }
