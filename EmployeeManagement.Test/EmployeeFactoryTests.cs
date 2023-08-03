@@ -18,7 +18,9 @@ namespace EmployeeManagement.Test
             // clean up the setup code, if required.
         }
 
-        [Fact]
+        // [Fact(Skip = "Skipping this one for demo purposes.")] // skip example
+        [Fact] 
+        [Trait("Category", "EmployeeFactory_CreateEmployee_Salary")]
         public void CreateEmployee_ConstructInternalEmployee_SalaryMustBe2500()
         {
             var employee = (InternalEmployee)_employeeFactory.CreateEmployee("Kevin", "Dockx");
@@ -26,6 +28,7 @@ namespace EmployeeManagement.Test
             Assert.Equal(2500, employee.Salary);
         }
         [Fact]
+        [Trait("Category", "EmployeeFactory_CreateEmployee_Salary")]
         public void CreateEmployee_ConstructInternalEmployee_SalaryMustBeBetween2500And3500()
         {
             var employee = (InternalEmployee)_employeeFactory.CreateEmployee("Kevin", "Dockx");
@@ -33,6 +36,7 @@ namespace EmployeeManagement.Test
             Assert.True(employee.Salary >= 2500 && employee.Salary <= 3500, "Salary must be between 2500 and 3500.");
         }
         [Fact]
+        [Trait("Category", "EmployeeFactory_CreateEmployee_Salary")]
         public void CreateEmployee_ConstructInternalEmployee_SalaryMustBeBetween2500And3500_Alternative()
         {
             var employee = (InternalEmployee)_employeeFactory.CreateEmployee("Kevin", "Dockx");
@@ -41,6 +45,7 @@ namespace EmployeeManagement.Test
             Assert.True(employee.Salary <= 3500);
         }
         [Fact]
+        [Trait("Category", "EmployeeFactory_CreateEmployee_Salary")]
         public void CreateEmployee_ConstructInternalEmployee_SalaryMustBeBetween2500And3500_AlternativeWithInRange()
         {
             // Act
@@ -50,6 +55,7 @@ namespace EmployeeManagement.Test
             Assert.InRange(employee.Salary, 2500, 3500);
         }
         [Fact]
+        [Trait("Category", "EmployeeFactory_CreateEmployee_Salary")]
         public void CreateEmployee_ConstructInternalEmployee_SalaryMustBe2500_PrecisionExample()
         {
             // Act
@@ -60,6 +66,7 @@ namespace EmployeeManagement.Test
             Assert.Equal(2500, employee.Salary, 0);
         }
         [Fact]
+        [Trait("Category", "EmployeeFactory_CreateEmployee_ReturnType")]
         public void CreateEmployee_IsËxternalIsTrue_ReturnTypeMustBeExternalEmployee()
         {
             // Act
