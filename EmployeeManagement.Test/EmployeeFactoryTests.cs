@@ -6,6 +6,8 @@ namespace EmployeeManagement.Test
     public class EmployeeFactoryTests : IDisposable
     {
         private EmployeeFactory _employeeFactory;
+
+        // constructor and Dispose method will run for each test
         public EmployeeFactoryTests() 
         {
             _employeeFactory = new EmployeeFactory();
