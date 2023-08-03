@@ -1,6 +1,5 @@
 ﻿using EmployeeManagement.DataAccess.Entities;
 using EmployeeManagement.DataAccess.Services;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Services.Test
 {
