@@ -27,6 +27,18 @@ namespace EmployeeManagement.Test
             }
         }
 
+        public static TheoryData<int, bool> StronglyTypedExampleTestDataForGiveRaise_WithProperty
+        {
+            get
+            {
+                return new TheoryData<int, bool>()
+                {
+                    { 100, true },
+                    { 200, false },
+                };
+            }
+        }
+
         public static IEnumerable<object[]> ExampleTestDataForGiveRaise_WithMethod(int testDataInstancesToProvide)
         {
             var testData = new List<object[]>
@@ -86,7 +98,10 @@ namespace EmployeeManagement.Test
             nameof(DataDrivenEmployeeServiceTests.ExampleTestDataForGiveRaise_WithMethod),
             1,
             MemberType = typeof(DataDrivenEmployeeServiceTests))]*/
-        [ClassData(typeof(EmployeeServiceTestData))]
+        // [ClassData(typeof(EmployeeServiceTestData ))]
+        // [ClassData(typeof(StronglyTypedEmployeeServiceTestData))]
+        // [MemberData(nameof(StronglyTypedExampleTestDataForGiveRaise_WithProperty))]
+        [ClassData(typeof(StronglyTypedEmployeeServiceTestData_FromFile))]
         public async Task GiveRaise_RaiseGiven_EmployeeMinimumRaiseGivenMatchesValue(int raiseGiven, bool expectedValueForMinimumRaiseGiven)
         {
             // Arrange  
