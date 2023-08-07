@@ -26,7 +26,7 @@ namespace EmployeeManagement.Controllers
             var internalEmployees = await _employeeService.FetchInternalEmployeesAsync();
 
             // with manual mapping
-            var internalEmployeeDtos =
+            /*var internalEmployeeDtos =
                 internalEmployees.Select(e => new InternalEmployeeDto()
                 {
                     Id = e.Id,
@@ -35,11 +35,11 @@ namespace EmployeeManagement.Controllers
                     Salary = e.Salary,
                     SuggestedBonus = e.SuggestedBonus,
                     YearsInService = e.YearsInService
-                });
+                });*/
 
             // with AutoMapper
-            //var internalEmployeeDtos =
-            //    _mapper.Map<IEnumerable<InternalEmployeeDto>>(internalEmployees);
+            var internalEmployeeDtos =
+                _mapper.Map<IEnumerable<InternalEmployeeDto>>(internalEmployees);
 
             return Ok(internalEmployeeDtos);
         }
