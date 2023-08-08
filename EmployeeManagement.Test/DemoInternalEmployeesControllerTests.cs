@@ -60,7 +60,40 @@ namespace EmployeeManagement.Test
 
 
             // Assert
-            var actionResult = Assert.IsAssignableFrom<IActionResult>(result);
+            Assert.IsAssignableFrom<IActionResult>(result);
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("GetInternalEmployees", redirectToActionResult.ActionName);
+            Assert.Equal("ProtectedInternalEmployees", redirectToActionResult.ControllerName);
+        }
+
+        [Fact]
+        public void GetProtectedInternalEmployees_GetActionForUserInAdminrole_MustRedirectToGetInternalEmployeesOnProtectedInternalEmployees_withMoq()
+        {
+            // Arrange
+            var employeeServiceMock = new Mock<IEmployeeService>();
+            var mapperMock = new Mock<IMapper>();
+            var demoInternalEmployeesController = new DemoInternalEmployeesController(employeeServiceMock.Object, mapperMock.Object);
+
+            var mockPrincipal = new Mock<ClaimsPrincipal>();
+            mockPrincipal
+                .Setup(x => x.IsInRole(It.Is<string>(s => s == "Admin")))
+                .Returns(true);
+
+            var httpContextMock = new Mock<HttpContext>();
+            httpContextMock.Setup(c => c.User)
+                .Returns(mockPrincipal.Object);
+
+            demoInternalEmployeesController.ControllerContext = new ControllerContext()
+            {
+                HttpContext = httpContextMock.Object,
+            };
+
+            // Act
+            var result = demoInternalEmployeesController.GetProtectedInternalEmployees();
+
+
+            // Assert
+            Assert.IsAssignableFrom<IActionResult>(result);
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("GetInternalEmployees", redirectToActionResult.ActionName);
             Assert.Equal("ProtectedInternalEmployees", redirectToActionResult.ControllerName);
